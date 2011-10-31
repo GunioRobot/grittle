@@ -27,11 +27,11 @@ def make_line_between_graphics(commit, parent)
 end
 
 def layout()
-  `osascript -e "tell application \\"Omnigraffle Professional 5\\"" -e "tell canvas of front window" -e "layout" -e "end tell" -e "end tell"` 
+  `osascript -e "tell application \\"Omnigraffle Professional 5\\"" -e "tell canvas of front window" -e "layout" -e "end tell" -e "end tell"`
 end
 
 def draw(head)
-  
+
 end
 
 # Substitute the path to your repo (or send me a patch to make this accept args)
@@ -54,14 +54,14 @@ commits.each { |c|
     }
   }
 
-# Create graphics for all the tags  
+# Create graphics for all the tags
 repo.tags.each { |t|
     if shapes.has_key? t.commit.id then #if we didn't draw the commit, don't draw the tag that refs it.
       tagGraphic = make_graphic_for_tag(t)
       make_line_between_graphics(tagGraphic, shapes[t.commit.id])
     end
   }
-  
+
 # Create graphics for the heads
   repo.heads.each { |h|
     if shapes.has_key? h.commit.id then
@@ -69,6 +69,6 @@ repo.tags.each { |t|
       make_line_between_graphics(headGraphic, shapes[h.commit.id])
     end
     }
-  
+
 # Tidy up
   layout()
